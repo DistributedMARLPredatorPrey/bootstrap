@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  replay-buffer-service:
+    image: replay-buffer #ghcr.io/distributedmarlpredatorprey/replay-buffer-service:release-0.1.0
+    container_name: replay-buffer-service
+    environment:
+      GLOBAL_CONFIG_PATH: /usr/app/config/config.yaml
+      PREDATOR_DATASET_PATH: /usr/app/dataset/predator_data.csv
+      PREY_DATASET_PATH: /usr/app/dataset/prey_data.csv
+    volumes:
+      - ./config/config.yaml:/usr/app/config/config.yaml
+      - ./config/replay-buffer/:/usr/app/dataset/
