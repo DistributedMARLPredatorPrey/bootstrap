@@ -13,7 +13,7 @@ services:
       - rabbitmq_data:/var/lib/rabbitmq
     healthcheck:
       test: rabbitmq-diagnostics -q ping
-      interval: 1s
+      interval: 5s
       timeout: 10s
       retries: 1
 
@@ -31,7 +31,7 @@ services:
 
   learner-service:
     image: learner-service
-    #containter_name: learner-service
+    container_name: learner-service
     hostname: learner
     depends_on:
       #replay-buffer-service
@@ -46,6 +46,8 @@ services:
       BROKER_HOST: rabbitmq-broker
     volumes:
       - ./config/config.yaml:/usr/app/config/config.yaml
+
+  
 
 
 volumes:
