@@ -3,7 +3,7 @@
 
 pred_prey_services = [f"""
     predator-prey-service-{i}:
-        image: predator-prey-service
+        image: ghcr.io/distributedmarlpredatorprey/predator-prey-service:release-0.2.0
         container_name: predator-prey-service-{i}
         hostname: predator-prey-service-{i}
         environment:

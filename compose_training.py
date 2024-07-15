@@ -3,7 +3,7 @@
 
 pred_prey_services = [f"""
     predator-prey-service-{i}:
-        image: predator-prey-service
+        image: ghcr.io/distributedmarlpredatorprey/predator-prey-service:release-0.2.0
         container_name: predator-prey-service-{i}
         hostname: predator-prey-service-{i}
         depends_on:
@@ -51,7 +51,7 @@ services:
             retries: 1
 
     replay-buffer-service:
-        image: replay-buffer #ghcr.io/distributedmarlpredatorprey/replay-buffer-service:release-0.2.0
+        image: ghcr.io/distributedmarlpredatorprey/replay-buffer-service:release-0.3.0
         container_name: replay-buffer-service
         hostname: replay-buffer
         environment:
@@ -76,7 +76,7 @@ for i in range(len(pred_prey_services)):
 
 suffix = f"""
     pred-learner-service:
-        image: learner-service
+        image: ghcr.io/distributedmarlpredatorprey/learner-service:main
         container_name: pred-learner-service
         hostname: pred-learner
         depends_on:
@@ -96,7 +96,7 @@ suffix = f"""
             - ../learner-service/:/usr/app/
 
     prey-learner-service:
-        image: learner-service
+        image: ghcr.io/distributedmarlpredatorprey/learner-service:main
         container_name: prey-learner-service
         hostname: prey-learner
         depends_on:
