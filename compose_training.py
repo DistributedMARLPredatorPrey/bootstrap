@@ -3,7 +3,7 @@
 
 pred_prey_services = [f"""
     predator-prey-service-{i}:
-        image: ghcr.io/distributedmarlpredatorprey/predator-prey-service:release-0.2.0
+        image: ghcr.io/distributedmarlpredatorprey/predator-prey-service:release-0.2.2
         container_name: predator-prey-service-{i}
         hostname: predator-prey-service-{i}
         depends_on:
@@ -24,10 +24,8 @@ pred_prey_services = [f"""
             timeout: 5s
             retries: 10
         volumes:
-            - ../predator-prey-service/venv/:/usr/app/venv/
-            - ../predator-prey-service/:/usr/app/
             - ./config/:/usr/app/config/
-            #- ./config/config.yaml:/usr/app/config/config.yaml
+            - ./data/predator-prey-service/:/usr/app/src/main/resources/
     """ for i in range(5)]
 
 prefix = """
@@ -62,7 +60,6 @@ services:
         volumes:
             - ./config/config.yaml:/usr/app/config/config.yaml
             - ./config/replay-buffer/:/usr/app/dataset/
-            - ../replay-buffer-service/:/usr/app/
 
 """
 
@@ -76,7 +73,7 @@ for i in range(len(pred_prey_services)):
 
 suffix = f"""
     pred-learner-service:
-        image: ghcr.io/distributedmarlpredatorprey/learner-service:main
+        image: ghcr.io/distributedmarlpredatorprey/learner-service:release-0.2.2
         container_name: pred-learner-service
         hostname: pred-learner
         depends_on:
@@ -93,10 +90,9 @@ suffix = f"""
             BROKER_HOST: rabbitmq-broker
         volumes:
             - ./config/config.yaml:/usr/app/config/config.yaml
-            - ../learner-service/:/usr/app/
 
     prey-learner-service:
-        image: ghcr.io/distributedmarlpredatorprey/learner-service:main
+        image: ghcr.io/distributedmarlpredatorprey/learner-service:release-0.2.2
         container_name: prey-learner-service
         hostname: prey-learner
         depends_on:
@@ -113,7 +109,6 @@ suffix = f"""
             BROKER_HOST: rabbitmq-broker
         volumes:
             - ./config/config.yaml:/usr/app/config/config.yaml
-            - ../learner-service/:/usr/app/
 
 volumes:
     rabbitmq_data:
