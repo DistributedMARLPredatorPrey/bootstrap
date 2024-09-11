@@ -5,9 +5,9 @@ environment:
   num_preys: 1
   acc_lower_bound: -1
   acc_upper_bound: 1
-  num_states: 14
+  num_states: 30
   num_actions: 2
-  r: 3
-  vd: 100
-  life: 50
+  r: 10
+  vd: 250
+  life: 200
   save_experiment_data: true

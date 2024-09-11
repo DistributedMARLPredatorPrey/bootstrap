@@ -3,7 +3,7 @@
 
 pred_prey_services = [f"""
     predator-prey-service-{i}:
-        image: ghcr.io/distributedmarlpredatorprey/predator-prey-service:release-0.2.0
+        image: predator-prey-service #ghcr.io/distributedmarlpredatorprey/predator-prey-service:release-0.2.0
         container_name: predator-prey-service-{i}
         hostname: predator-prey-service-{i}
         environment:
@@ -20,7 +20,7 @@ pred_prey_services = [f"""
             - ../predator-prey-service/:/usr/app/
             - ./config/:/usr/app/config/
             #- ./config/config.yaml:/usr/app/config/config.yaml
-    """ for i in range(5)]
+    """ for i in range(8)]
 
 prefix = """
 version: '3'
