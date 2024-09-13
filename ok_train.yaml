@@ -19,7 +19,7 @@ services:
             retries: 1
 
     replay-buffer-service:
-        image: ghcr.io/distributedmarlpredatorprey/replay-buffer-service:release-0.3.0
+        image: replay-buffer-service #ghcr.io/distributedmarlpredatorprey/replay-buffer-service:release-0.3.0
         container_name: replay-buffer-service
         hostname: replay-buffer
         environment:
