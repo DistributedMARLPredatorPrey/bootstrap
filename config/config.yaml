@@ -1,8 +1,8 @@
 environment:
   x_dim: 250
   y_dim: 250
-  num_predators: 10
-  num_preys: 1
+  num_predators: 5
+  num_preys: 5
   acc_lower_bound: -1
   acc_upper_bound: 1
   num_states: 30

@@ -3,7 +3,7 @@
 
 pred_prey_services = [f"""
     predator-prey-service-{i}:
-        image: ghcr.io/distributedmarlpredatorprey/predator-prey-service:release-0.2.3
+        image: predator-prey-service #ghcr.io/distributedmarlpredatorprey/predator-prey-service:release-0.2.3
         container_name: predator-prey-service-{i}
         hostname: predator-prey-service-{i}
         depends_on:
@@ -25,7 +25,7 @@ pred_prey_services = [f"""
             retries: 10
         volumes:
             - ./config/:/usr/app/config/
-            - ./data/predator-prey-service/:/usr/app/src/main/resources/
+            - ../predator-prey-service/:/usr/app/
     """ for i in range(5)]
 
 prefix = """
@@ -51,7 +51,7 @@ services:
             retries: 1
 
     replay-buffer-service:
-        image: ghcr.io/distributedmarlpredatorprey/replay-buffer-service:release-0.3.0
+        image: replay-buffer-service #ghcr.io/distributedmarlpredatorprey/replay-buffer-service:release-0.3.0
         container_name: replay-buffer-service
         hostname: replay-buffer
         environment:
@@ -62,7 +62,7 @@ services:
         volumes:
             - ./config/config.yaml:/usr/app/config/config.yaml
             - ./config/replay-buffer/:/usr/app/dataset/
-
+            - ../replay-buffer-service/:/usr/app/
 """
 
 learner_dependencies = ""
@@ -75,7 +75,7 @@ for i in range(len(pred_prey_services)):
 
 suffix = f"""
     learner-service:
-        image: ghcr.io/distributedmarlpredatorprey/learner-service:main
+        image: learner-service #ghcr.io/distributedmarlpredatorprey/learner-service:main
         container_name: learner-service
         hostname: pred-learner
         depends_on:
@@ -86,13 +86,13 @@ suffix = f"""
             PYTHONUNBUFFERED: 1
             GLOBAL_CONFIG_PATH: /usr/app/config/config.yaml
             AGENT_TYPE: predator
-            BATCH_SIZE: 10
+            BATCH_SIZE: 64
             REPLAY_BUFFER_HOST: replay-buffer
             REPLAY_BUFFER_PORT: 80
             BROKER_HOST: rabbitmq-broker
         volumes:
             - ./config/config.yaml:/usr/app/config/config.yaml
-
+            - ../learner-service/:/usr/app/
 volumes:
     rabbitmq_data:
 """
