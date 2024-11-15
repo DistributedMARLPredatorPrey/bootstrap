@@ -1,1 +1,3 @@
-config/replay-buffer/*csv
+config/replay-buffer/
+data/
+*.mp4
