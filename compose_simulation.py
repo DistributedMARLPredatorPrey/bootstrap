@@ -7,31 +7,31 @@ import sys
 def compose_simulation(num_env: int):
     pred_prey_services = [
         f"""
-        predator-prey-service-{i}:
-            image: pred-prey-service #ghcr.io/distributedmarlpredatorprey/predator-prey-service:release-0.2.3
-            container_name: predator-prey-service-{i}
-            hostname: predator-prey-{i}
-            restart: always
-            environment:
-                <<: *common-variables
-                REL_PATH: {i}
-                RANDOM_SEED: {i}
-            volumes:
-                - ./config/:/usr/app/config/
-                - ../predator-prey-service/:/usr/app/"""
+    predator-prey-service-{i}:
+        image: pred-prey-service #ghcr.io/distributedmarlpredatorprey/predator-prey-service:release-0.2.3
+        container_name: predator-prey-service-{i}
+        hostname: predator-prey-{i}
+        restart: always
+        environment:
+            <<: *common-variables
+            REL_PATH: {i}
+            RANDOM_SEED: {i}
+        volumes:
+            - ./config/:/usr/app/config/
+            - ../predator-prey-service/:/usr/app/"""
         for i in range(num_env)
     ]
 
     prefix = """x-common-variables: &common-variables
-        GLOBAL_CONFIG_PATH: /usr/app/config/config.yaml
-        PYTHONUNBUFFERED: 1
-        REPLAY_BUFFER_HOST: replay-buffer
-        REPLAY_BUFFER_PORT: 80
-        BROKER_HOST: rabbitmq-broker
-        PROJECT_ROOT_PATH: /usr/app/
-        MODE: simulation 
+    GLOBAL_CONFIG_PATH: /usr/app/config/config.yaml
+    PYTHONUNBUFFERED: 1
+    REPLAY_BUFFER_HOST: replay-buffer
+    REPLAY_BUFFER_PORT: 80
+    BROKER_HOST: rabbitmq-broker
+    PROJECT_ROOT_PATH: /usr/app/
+    MODE: simulation 
 
-    services:"""
+services:"""
 
     compose = prefix
     for pred_prey_service in pred_prey_services:
