@@ -25,9 +25,6 @@ def compose_simulation(num_env: int):
     prefix = """x-common-variables: &common-variables
     GLOBAL_CONFIG_PATH: /usr/app/config/config.yaml
     PYTHONUNBUFFERED: 1
-    REPLAY_BUFFER_HOST: replay-buffer
-    REPLAY_BUFFER_PORT: 80
-    BROKER_HOST: rabbitmq-broker
     PROJECT_ROOT_PATH: /usr/app/
     MODE: simulation 
 
