@@ -8,7 +8,7 @@ def compose_train(num_env: int):
     pred_prey_services = [
         f"""
     predator-prey-service-{i}:
-        image: pred-prey-service #ghcr.io/distributedmarlpredatorprey/predator-prey-service:release-0.2.3
+        image: predator-prey-service #ghcr.io/distributedmarlpredatorprey/predator-prey-service:release-0.2.3
         container_name: predator-prey-service-{i}
         hostname: predator-prey-{i}
         restart: always
@@ -17,9 +17,7 @@ def compose_train(num_env: int):
                 condition: service_healthy
         environment:
             <<: *common-variables
-            REL_PATH: {i}
             RANDOM_SEED: {i}
-            MODE: train
         healthcheck:
             test: python3 -m src.main.controllers.agents.policy.predator_prey.actor_receiver_healthcheck
             interval: 2s
@@ -27,7 +25,8 @@ def compose_train(num_env: int):
             retries: 10
         volumes:
             - ./config/:/usr/app/config/
-            - ../predator-prey-service/:/usr/app/
+            - ./data/predator_prey_service/environment_{i}/:/usr/app/src/main/resources/experiment_data/
+            #- ../predator-prey-service/:/usr/app/
         """
         for i in range(num_env)
     ]
@@ -39,6 +38,7 @@ def compose_train(num_env: int):
     REPLAY_BUFFER_PORT: 80
     BROKER_HOST: rabbitmq-broker
     PROJECT_ROOT_PATH: /usr/app/
+    MODE: train
 
 services:
     rabbitmq:

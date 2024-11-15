@@ -14,7 +14,6 @@ def compose_simulation(num_env: int):
         restart: always
         environment:
             <<: *common-variables
-            REL_PATH: {i}
             RANDOM_SEED: {i}
         volumes:
             - ./config/:/usr/app/config/
