@@ -9,7 +9,7 @@ def compose_train(num_env: int):
         f"""
     predator-prey-service-{i}:
         image: predator-prey-service #ghcr.io/distributedmarlpredatorprey/predator-prey-service:release-0.2.3
-        container_name: predator-prey-service-{i}
+        container_name: predator-prey-service-training-{i}
         hostname: predator-prey-{i}
         restart: always
         depends_on:
@@ -25,7 +25,7 @@ def compose_train(num_env: int):
             retries: 10
         volumes:
             - ./config/:/usr/app/config/
-            - ./data/predator_prey_service/environment_{i}/:/usr/app/src/main/resources/experiment_data/
+            - ./data/predator_prey_service/environment_{i}/:/usr/app/src/main/resources/
             #- ../predator-prey-service/:/usr/app/
         """
         for i in range(num_env)
