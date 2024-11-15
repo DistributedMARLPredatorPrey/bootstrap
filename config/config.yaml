@@ -3,10 +3,7 @@ environment:
   y_dim: 250
   num_predators: 5
   num_preys: 5
-  acc_lower_bound: -1
-  acc_upper_bound: 1
   num_states: 30
-  num_actions: 2
   r: 10
   vd: 250
   life: 200
