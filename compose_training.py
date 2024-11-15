@@ -29,7 +29,7 @@ def compose_train(num_env: int):
             - ./config/:/usr/app/config/
             - ../predator-prey-service/:/usr/app/
         """
-        for i in range(5)
+        for i in range(num_env)
     ]
 
     prefix = """x-common-variables: &common-variables
