@@ -107,7 +107,7 @@ volumes:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Creates a Docker Compose file to run Distributed MARL Predator-Prey"
+        description="Creates a Docker Compose file content to train multiple MARL Predator-Prey environments."
     )
     parser.add_argument(
         "--num_env",
@@ -116,7 +116,7 @@ def main():
         help="Number of environments to run in parallel.",
     )
     args = parser.parse_args()
-    compose_train(args.num_env)
+    compose_train(int(args.num_env))
     print(
         "-----------------------------------------------------------------------------------",
         file=sys.stderr,
