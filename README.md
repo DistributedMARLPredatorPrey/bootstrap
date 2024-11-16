@@ -49,13 +49,14 @@ It allows you to:
    ```bash
    docker compose -f docker-compose-simulation.yaml up
    ```
-### Animate the agents of an environment:
-Specify the index of the environment, as well as the number of predators and preys that has been chosen:
+### Animate the agents of an environment
+Run the following command after or during a training phase:
 ```bash
 python3 scatter_agents.py --env_idx 0 --num_predators 5 --num_preys 5
 ```
-### Analyze the Critic model loss tendency over time (of both Predator and Prey's network)
-Run the following command after or during a training phase:
+You should specify the index of the environment, as well as the number of predators and preys that has been chosen.
+
+### Analyze the Critic model loss tendency over time
 ```bash
 python3 plot_losses.py
 ```
