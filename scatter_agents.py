@@ -68,7 +68,7 @@ def scatter_agents(idx: int, num_predators: int, num_preys: int):
         )
         for i in range(len(x_pred)):
             plt.text(
-                x_pred[i] + 0.1, y_pred[i], round((r_pred[i] + 1000), 2), fontsize=12
+                x_pred.iloc[i] + 0.1, y_pred.iloc[i], round((r_pred.iloc[i] + 1000), 2), fontsize=12
             )  # Offset x[i] for better readability
         #
         plt.scatter(
@@ -80,7 +80,7 @@ def scatter_agents(idx: int, num_predators: int, num_preys: int):
         )
         for i in range(len(x_prey)):
             plt.text(
-                x_prey[i] + 0.1, y_prey[i], round((r_prey[i] + 1000), 2), fontsize=12
+                x_prey.iloc[i] + 0.1, y_prey.iloc[i], round((r_prey.iloc[i] + 1000), 2), fontsize=12
             )  # Offset x[i] for better readability
 
         camera.snap()
