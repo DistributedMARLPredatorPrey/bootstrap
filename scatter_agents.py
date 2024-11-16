@@ -11,6 +11,7 @@ experiment_data_path: str = os.path.join("data", "predator_prey_service")
 blue_cmap = plt.cm.Blues
 red_cmap = plt.cm.Reds
 
+
 def scatter_agents(idx: int, num_predators: int, num_preys: int):
     """
     Scatters Agents
@@ -20,8 +21,12 @@ def scatter_agents(idx: int, num_predators: int, num_preys: int):
     :return:
     """
 
-    coordinates_path = os.path.join(experiment_data_path, f"environment_{idx}", "positions.csv")
-    rewards_path = os.path.join(experiment_data_path, f"environment_{idx}", "rewards.csv")
+    coordinates_path = os.path.join(
+        experiment_data_path, f"environment_{idx}", "positions.csv"
+    )
+    rewards_path = os.path.join(
+        experiment_data_path, f"environment_{idx}", "rewards.csv"
+    )
 
     df_coordinates: pd.DataFrame = pd.read_csv(coordinates_path)
     df_rewards: pd.DataFrame = pd.read_csv(rewards_path)
@@ -29,13 +34,13 @@ def scatter_agents(idx: int, num_predators: int, num_preys: int):
     x_coord = [col for col in df_coordinates.columns if col.startswith("x")]
     y_coord = [col for col in df_coordinates.columns if col.startswith("y")]
     reward_cols = [col for col in df_rewards.columns if col.startswith("r")]
-        
+
     # Scatter
     camera = Camera(plt.figure())
     plt.title(f"Predator-Prey Environment {idx}")
 
-    plt.scatter([], [], color=blue_cmap(100), label='Preys')
-    plt.scatter([], [], color=red_cmap(100), label='Predators')
+    plt.scatter([], [], color=blue_cmap(100), label="Preys")
+    plt.scatter([], [], color=red_cmap(100), label="Predators")
     plt.legend()
 
     for i in range(len(df_rewards)):
@@ -43,8 +48,16 @@ def scatter_agents(idx: int, num_predators: int, num_preys: int):
         y = df_coordinates[y_coord].loc[i]
         r = df_rewards[reward_cols].loc[i]
 
-        x_pred, y_pred, r_pred = (x[:num_predators], y[:num_predators], r[:num_predators])
-        x_prey, y_prey, r_prey = (x[num_predators:], y[num_predators:], r[num_predators:])
+        x_pred, y_pred, r_pred = (
+            x[:num_predators],
+            y[:num_predators],
+            r[:num_predators],
+        )
+        x_prey, y_prey, r_prey = (
+            x[num_predators:],
+            y[num_predators:],
+            r[num_predators:],
+        )
 
         plt.scatter(
             x_pred,
@@ -71,11 +84,11 @@ def scatter_agents(idx: int, num_predators: int, num_preys: int):
             )  # Offset x[i] for better readability
 
         camera.snap()
-    
+
     anim = camera.animate(blit=True)
     plt.show()
     # Decomment to save the video
-    #anim.save("scatter.mp4")
+    # anim.save("scatter.mp4")
 
 
 def main():
@@ -102,7 +115,10 @@ def main():
     )
 
     args = parser.parse_args()
-    scatter_agents(idx=args.env_idx, num_predators=args.num_predators, num_preys=args.num_preys)
+    scatter_agents(
+        idx=args.env_idx, num_predators=args.num_predators, num_preys=args.num_preys
+    )
+
 
 if __name__ == "__main__":
     main()

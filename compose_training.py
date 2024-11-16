@@ -89,8 +89,9 @@ services:
             {learner_dependencies}
         environment:
             <<: *common-variables
-            BATCH_SIZE: 2
+            BATCH_SIZE: 64
         volumes:
+            - ./data/learner_service/:/usr/app/src/main/resources/loss/
             - ./config/config.yaml:/usr/app/config/config.yaml
             - ../learner-service/:/usr/app/
 volumes:
