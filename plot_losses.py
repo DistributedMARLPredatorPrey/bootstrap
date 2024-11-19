@@ -23,7 +23,7 @@ def plot_critic_loss():
         print(f"\tSlope: {slope}")
         print(f"\tIntercept: {intercept}")
         print(f"\tR-squared: {r_value**2}")
-        print(f"\tP-value: {p_value} (Significant: {p_value < 0.05})")
+        print(f"\tP-value: {p_value}") #(Significant: {p_value < 0.05})")
         print("------------------------------------")
 
         # Plot the data and regression line
