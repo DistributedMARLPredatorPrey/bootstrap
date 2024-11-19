@@ -4,9 +4,9 @@ The bootstrap of the project.
 
 This repository contains all the use cases of the *Distributed MARL Predator-Prey* Project.
 It allows you to:
-1. Train two separate MARL models for Predator and Preys. Using a data augmentation approach, agents' experiences are collected from multiple parallel environments.
-2. Simulate multiple Predator-Prey MARL environments, if a previous training phase is completed;
-3. Plot the agents of an environment in a 2D scatterplot;
+1. Train the MARL System. Agents' experiences are collected from multiple parallel environments and integrated into a centralized dataset, ultimately used for the learning process.
+2. Simulate multiple Predator-Prey MARL environments, if a previous training phase has been completed;
+3. Plot the agents of an environment in a 2D scatterplot animation;
 4. Plot the Critic network loss tendency over time.
 
 ## Prerequisites
@@ -15,12 +15,12 @@ It allows you to:
 
 ## Use cases
 
-### Train two MARL models using data augmentation
+### Train MARL System by parallelizing the environments
 1. Create a Docker compose file by specifying the number Predator-Prey environments to parallelize:
  ```bash
  python3 compose_training.py --num_env 5 > docker-compose-training.yaml
  ```
-2. Configure the environments by specifying its parameters inside the `config/config.yaml` file. The default configuration is:
+2. Configure the environments by specifying the parameters inside the `config/config.yaml` file. The default configuration is:
  
  ```yaml
  environment:
@@ -54,9 +54,9 @@ Run the following command after or during a training phase:
 ```bash
 python3 scatter_agents.py --env_idx 0 --num_predators 5 --num_preys 5
 ```
-You should specify the index of the environment, as well as the number of predators and preys that has been chosen.
+You should specify the index of the environment and the number of predators and preys that has been chosen.
 
-### Analyze the Critic model loss tendency over time
+### Plot the Critic model loss tendency over time
 ```bash
 python3 plot_losses.py
 ```
