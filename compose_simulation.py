@@ -8,7 +8,7 @@ def compose_simulation(num_env: int):
     pred_prey_services = [
         f"""
     predator-prey-service-{i}:
-        image: predator-prey-service #ghcr.io/distributedmarlpredatorprey/predator-prey-service:release-0.2.3
+        image: ghcr.io/distributedmarlpredatorprey/predator-prey-service:main
         container_name: predator-prey-service-simulation-{i}
         hostname: predator-prey-{i}
         restart: always
@@ -17,8 +17,7 @@ def compose_simulation(num_env: int):
             RANDOM_SEED: {i}
         volumes:
             - ./config/:/usr/app/config/
-            - ./data/predator_prey_service/environment_{i}/:/usr/app/src/main/resources/
-            #- ../predator-prey-service/:/usr/app/"""
+            - ./data/predator_prey_service/environment_{i}/:/usr/app/src/main/resources/"""
         for i in range(num_env)
     ]
 
