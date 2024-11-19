@@ -63,10 +63,9 @@ services:
         restart: always
         environment:
             <<: *common-variables            
-            DATASET_PATH: /usr/app/dataset/dataset.csv
         volumes:
             - ./config/config.yaml:/usr/app/config/config.yaml
-            - ./config/replay-buffer/:/usr/app/dataset/
+            - ./data/replay-buffer-service/:/usr/app/src/main/resources/
             - ../replay-buffer-service/:/usr/app/
     """
 
