@@ -11,7 +11,13 @@ It allows you to:
 
 ## Prerequisites
 
-- Make sure you have a running and active version of [Docker](https://docs.docker.com/engine/install/).
+- Make sure you have a running and active version of [Docker](https://docs.docker.com/engine/install/);
+- Setup a Python3 Virtualenv and install the dependencies:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
 
 ## Use cases
 
