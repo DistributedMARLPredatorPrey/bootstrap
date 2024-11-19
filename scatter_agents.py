@@ -36,14 +36,13 @@ def scatter_agents(idx: int, num_predators: int, num_preys: int):
     reward_cols = [col for col in df_rewards.columns if col.startswith("r")]
 
     # Scatter
-    camera = Camera(plt.figure())
+    camera = Camera(plt.figure("Predator-Prey Environment"))
     plt.title(f"Predator-Prey Environment {idx}")
 
     plt.scatter([], [], color=blue_cmap(100), label="Preys")
     plt.scatter([], [], color=red_cmap(100), label="Predators")
-    plt.legend()
 
-    for i in range(len(df_rewards)):
+    for i in range(max(len(df_rewards) - 500, 0), len(df_rewards)):
         x = df_coordinates[x_coord].loc[i]
         y = df_coordinates[y_coord].loc[i]
         r = df_rewards[reward_cols].loc[i]
@@ -85,7 +84,8 @@ def scatter_agents(idx: int, num_predators: int, num_preys: int):
 
         camera.snap()
 
-    anim = camera.animate(blit=True)
+    anim = camera.animate()
+    plt.legend()
     plt.show()
     # Decomment to save the video
     # anim.save("scatter.mp4")
