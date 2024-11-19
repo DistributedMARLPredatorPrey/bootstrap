@@ -8,7 +8,7 @@ def compose_train(num_env: int):
     pred_prey_services = [
         f"""
     predator-prey-service-{i}:
-        image: predator-prey-service #ghcr.io/distributedmarlpredatorprey/predator-prey-service:release-0.2.3
+        image: ghcr.io/distributedmarlpredatorprey/predator-prey-service:main
         container_name: predator-prey-service-training-{i}
         hostname: predator-prey-{i}
         restart: always
@@ -26,7 +26,6 @@ def compose_train(num_env: int):
         volumes:
             - ./config/:/usr/app/config/
             - ./data/predator_prey_service/environment_{i}/:/usr/app/src/main/resources/
-            #- ../predator-prey-service/:/usr/app/
         """
         for i in range(num_env)
     ]
@@ -57,7 +56,7 @@ services:
             retries: 1
 
     replay-buffer-service:
-        image: replay-buffer-service #ghcr.io/distributedmarlpredatorprey/replay-buffer-service:release-0.3.0
+        image: ghcr.io/distributedmarlpredatorprey/replay-buffer-service:main
         container_name: replay-buffer-service
         hostname: replay-buffer
         restart: always
@@ -66,7 +65,6 @@ services:
         volumes:
             - ./config/config.yaml:/usr/app/config/config.yaml
             - ./data/replay-buffer-service/:/usr/app/src/main/resources/
-            - ../replay-buffer-service/:/usr/app/
     """
 
     learner_dependencies = ""
@@ -78,7 +76,7 @@ services:
 
     suffix = f"""
     learner-service:
-        image: learner-service #ghcr.io/distributedmarlpredatorprey/learner-service:main
+        image: ghcr.io/distributedmarlpredatorprey/learner-service:main
         container_name: learner-service
         hostname: learner
         restart: always
@@ -92,7 +90,6 @@ services:
         volumes:
             - ./data/learner_service/:/usr/app/src/main/resources/loss/
             - ./config/config.yaml:/usr/app/config/config.yaml
-            - ../learner-service/:/usr/app/
 volumes:
     rabbitmq_data:
     """
